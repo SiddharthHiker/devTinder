@@ -7,7 +7,6 @@ app.use(express.json());
 
 app.post("/signup", async (req, res) => {
   // Creating a new instance of the User model
-  console.log(req.body);
   const user = new User(req.body);
 
   try {
