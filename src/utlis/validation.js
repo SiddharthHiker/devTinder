@@ -11,6 +11,36 @@ const validateSignUpData = (req) => {
    }
 };
 
+const validateEditProfileData = (req) => {
+  const allowedEditFileds = [
+    "firstName", 
+    "lastName", 
+    "emailId",
+    "age", 
+    "gender", 
+    "photoUrl",
+    "about", 
+    "skills"
+  ];
+  const isEditAllowed = Object.keys(req.body).every((field) => 
+    allowedEditFileds.includes(field)
+ ); 
+ return isEditAllowed;
+};
+
+const forgotPassword = (req) => {
+  const allowedForgotPassword = [
+    "password"
+  ];
+  const isForgotPasswordAllowed = Object.keys(req.body).every((field) => 
+    allowedForgotPassword.includes(field)
+);
+return isForgotPasswordAllowed; 
+}
+
+
 module.exports = {
     validateSignUpData,
+    validateEditProfileData,
+    forgotPassword,
 };
