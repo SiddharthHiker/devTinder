@@ -27,6 +27,7 @@ requestRouter.post(
       });
       // If there is an Existing User in Db
       const toUser = await User.findById(toUserId);
+      
       if (!toUser) {
         return res.status(400).json({ message: "User not found" });
       }

@@ -60,7 +60,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
     const page = Math.max(1, parseInt(req.query.page) || 1); // Ensure the page is at least 1
-    const limit = Math.min(parseInt(req.query.limit) || 10, 50); // Limit the maximum value to 50
+    const limit = Math.min(parseInt(req.query.limit) || 10); // Limit the maximum value to 50
     const skip = (page - 1) * limit;
 
     // Fetch all connection requests (sent and received) by the user
