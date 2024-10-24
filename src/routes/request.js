@@ -13,8 +13,9 @@ requestRouter.post(
       const fromUserId = req.user._id;
       const toUserId = req.params.toUserId;
       const status = req.params.status;
+     
 
-      const allowedStatus = ["ignore", "intrested"];
+      const allowedStatus = ["ignore", "interested"];
       if (!allowedStatus.includes(status)) {
         return res.status(400).json({ message: "Invalid Status Type!" });
       }
@@ -27,7 +28,7 @@ requestRouter.post(
       });
       // If there is an Existing User in Db
       const toUser = await User.findById(toUserId);
-      
+
       if (!toUser) {
         return res.status(400).json({ message: "User not found" });
       }
@@ -67,14 +68,10 @@ requestRouter.post(
       if (!allowedStatus.includes(status)) {
         return res.status(400).json({ message: " Status not allowed!" });
       }
-
-      console.log("Request ID:", requestId);
-      console.log("Logged In User ID:", loggedInUser._id);
-
       const connectionRequest = await ConnectionRequest.findOne({
         _id: requestId,
         toUserId: loggedInUser._id,
-        status: "intrested",
+        status: "interested",
       });
       if (!connectionRequest) {
         return res
@@ -86,7 +83,7 @@ requestRouter.post(
 
       const data = await connectionRequest.save();
 
-      res.json({ messgae: "Connection request " +  status, data });
+      res.json({ messgae: "Connection request " + status, data });
     } catch (err) {
       res.status(400).send("ERROR:" + err.message);
     }

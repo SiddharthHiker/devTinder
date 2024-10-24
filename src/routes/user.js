@@ -12,6 +12,7 @@ const USER_SAFEDATA = [
   "age",
   "gender",
   "skills",
+  "about",
 ];
 
 userRouter.get("/user/requests/recived", userAuth, async (req, res) => {
@@ -20,7 +21,7 @@ userRouter.get("/user/requests/recived", userAuth, async (req, res) => {
 
     const connectionRequest = await ConnectionRequest.find({
       toUserId: loggedInUser._id,
-      status: "intrested",
+      status: "interested",
     }).populate("fromUserId", USER_SAFEDATA);
     res.json({
       message: "Data Fetch Sucessfully",
@@ -90,6 +91,5 @@ userRouter.get("/feed", userAuth, async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-
 
 module.exports = userRouter;

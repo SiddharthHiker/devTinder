@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema(
     photoUrl: {
       type: String,
       default:
-        "https://www.google.co.in/url?sa=i&url=https%3A%2F%2Fdummyimage.com%2F&psig=AOvVaw27V9R4qr9_fLGJiT2MAeMC&ust=1727719207632000&source=images&cd=vfe&opi=89978449&ved=2ahUKEwjLv7Te3eiIAxVjZmwGHdooCbIQjRx6BAgAEBg",
+        "https://www.kindpng.com/picc/m/252-2524695_dummy-profile-image-jpg-hd-png-download.png",
       validate(value) {
         if (!validator.isURL(value)) {
           throw new Error("Invalid photo URL:" + value);

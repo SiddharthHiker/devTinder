@@ -19,6 +19,7 @@ authRouter.post("/signup", async (req, res) => {
       age,
       photoUrl,
       about,
+      gender,
     } = req.body;
 
     // Encrypt  the password
@@ -34,10 +35,18 @@ authRouter.post("/signup", async (req, res) => {
       age,
       photoUrl,
       about,
+      gender
     });
 
-    await user.save();
-    res.send("User Added Successfully");
+    const saveUser = await user.save();
+    const token = await saveUser.getJWT();
+
+      // Add the Token to cookie and send the response back to user
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+      });
+
+    res.json({message:"User Added Successfully!", data: saveUser });
   } catch (err) {
     res.status(400).send("ERROR" + err.message);
   }
@@ -61,7 +70,7 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
       });
-      res.send("Login SucessFully!!!");
+      res.send(user);
     } else {
       throw new Error("Invalid credentials!!!");
     }
